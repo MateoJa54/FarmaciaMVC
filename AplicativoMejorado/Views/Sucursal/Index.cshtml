@@ -1,0 +1,104 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+<link href="~/css/modal.css" rel="stylesheet" />
+<h1 class="mb-4 text-center">Sucursal</h1>
+
+@* 
+<fieldset class="border p-4 rounded shadow-sm">
+    <legend class="w-auto px-3">Agregar Sucursal</legend>
+
+    <form id="frmGuardarSucursal" method="post" class="row g-3">
+        <div class="col-md-6">
+            <label for="inputNombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingrese el nombre">
+        </div>
+        <div class="col-md-6">
+            <label for="inputDireccion" class="form-label">Dirección</label>
+            <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Ingrese la dirección">
+        </div>
+
+        <div class="col-12 text-end mt-3">
+            <button type="button" class="btn btn-primary me-2" onclick="GuardarSucursal()">
+                <i class="bi bi-search"></i> Agregar
+            </button>
+            <button type="button" class="btn btn-secondary" onclick="LimpiarSucursal()">
+                <i class="bi bi-eraser"></i> Limpiar
+            </button>
+        </div>
+    </form>
+</fieldset>
+ *@
+
+<div class="container-fluid px-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2 text-coffee fw-bold mb-0">
+            <i class="bi bi-shop me-2"></i>Sucursales
+        </h1>
+        <button type="button" class="btn btn-coffee" data-bs-toggle="modal" onclick="MostrarModal()">
+            <i class="bi bi-plus-circle-fill me-2"></i>Nueva Sucursal
+        </button>
+    </div>
+
+    <div class="modal fade" id="modalSucursal" tabindex="-1" aria-labelledby="modalSucursalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-coffee text-white">
+                    <h5 class="modal-title fs-5" id="modalSucursalLabel">
+                        <i class="bi bi-building-gear me-2"></i>Gestionar Sucursal
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="frmSucursal" method="post" class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control border-coffee"
+                                       id="idSucursal" name="idSucursal" readonly>
+                                <label for="idSucursal" class="text-muted">ID Sucursal</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input type="text" class="form-control border-coffee"
+                                       id="nombre" name="nombre" required>
+                                <label for="nombre" class="text-muted">Nombre</label>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <input type="text" class="form-control border-coffee"
+                                       id="direccion" name="direccion" required>
+                                <label for="direccion" class="text-muted">Dirección</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer border-top">
+                    <button type="button" class="btn btn-outline-coffee" onclick="LimpiarSucursal()">
+                        <i class="bi bi-eraser me-2"></i>Limpiar
+                    </button>
+                    <button type="button" class="btn btn-coffee" onclick="GuardarSucursal()">
+                        <i class="bi bi-save me-2"></i>Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow">
+        <div class="card-header bg-coffee text-white py-3">
+            <h5 class="card-title mb-0">
+                <i class="bi bi-list-task me-2"></i>Registro de Sucursales
+            </h5>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <div id="divContenedorTabla" class="rounded-3"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/generic.js"></script>
+<script src="~/js/sucursal.js"></script>

@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - AplicativoMejorado</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/navegador.css" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --coffee-dark: #3E2723;
+            --coffee-medium: #5D4037;
+            --coffee-light: #D7CCC8;
+        }
+
+        body {
+            height: 100vh;
+            margin: 0;
+            background-color: var(--coffee-dark);
+            color: var(--coffee-light);
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: var(--coffee-medium);
+            padding-top: 20px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+            .sidebar.hidden {
+                transform: translateX(-100%);
+            }
+
+            .sidebar .logo {
+                text-align: center;
+                font-size: 1.25rem;
+                font-weight: bold;
+                padding: 1rem;
+                background-color: var(--coffee-dark);
+            }
+
+        .menu-toggle {
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+            .menu-toggle div {
+                width: 20px;
+                height: 3px;
+                background: white;
+                margin: 4px 0;
+            }
+
+        .menu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+            .menu li a {
+                display: block;
+                padding: 0.75rem 1rem;
+                color: var(--coffee-light);
+                text-decoration: none;
+            }
+
+                .menu li a:hover {
+                    background-color: var(--coffee-light);
+                    color: var(--coffee-dark);
+                }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+            transition: margin-left 0.3s ease-in-out;
+        }
+
+            .content.expanded {
+                margin-left: 0;
+            }
+    </style>
+</head>
+<body>
+    <nav class="sidebar" id="sidebar">
+        <div class="logo d-flex justify-content-between align-items-center">
+            <span>LOGO</span>
+            <span class="menu-toggle d-md-none" id="menu-toggle">
+                <div></div>
+                <div></div>
+                <div></div>
+            </span>
+        </div>
+        <ul class="menu">
+            <li><a asp-controller="Laboratorio" asp-action="Index">Laboratorio</a></li>
+            <li><a asp-controller="TipoMedicamento" asp-action="Index">Tipos de Medicamento</a></li>
+            <li><a asp-controller="Sucursal" asp-action="Index">Sucursal</a></li>
+            <li><a asp-controller="Medicamento" asp-action="Index">Medicamento</a></li>
+            <hr class="text-white">
+            <li class="px-3 py-2">Settings</li>
+            <li class="px-3 py-2">Privacy</li>
+            <li id="user-info" class="px-3 py-2">MJ <span class="badge bg-success">Online</span></li>
+        </ul>
+    </nav>
+
+    <div class="content" id="content">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <input type="hidden" id="hdfOculto" value='@Url.Content("~")' />
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('menu-toggle').addEventListener('click', function () {
+            document.getElementById('sidebar').classList.toggle('hidden');
+            document.getElementById('content').classList.toggle('expanded');
+        });
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
